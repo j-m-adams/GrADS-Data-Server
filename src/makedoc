@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Script to build GDS documentation
+#
+# Copyright (C) 2000-2021 by George Mason University.
+# Authored by Joe Wielgosz and maintained by Jennifer Adams.
+# See file COPYRIGHT for more information.
+
+rm -rf ../doc/api
+javadoc -protected -windowtitle "GrADS Data Server" -nodeprecatedlist \
+-d ../doc/api -sourcepath . \
+org.iges.util \
+org.iges.anagram \
+org.iges.anagram.service \
+org.iges.anagram.filter \
+org.iges.grads.server \
+org.iges.grads.server.dap

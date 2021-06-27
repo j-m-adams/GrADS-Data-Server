@@ -1,0 +1,3 @@
+#! /bin/sh
+`dirname $0`/bin/gds-stop.sh
+`dirname $0`/bin/gds-start.sh

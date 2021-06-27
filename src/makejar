@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# Script to build GDS jar files
+#
+# Copyright (C) 2000-2021 by George Mason University.
+# Authored by Joe Wielgosz and maintained by Jennifer Adams.
+# See file COPYRIGHT for more information.
+
+if [ ! "$ANAGRAM_HOME" ] ; then
+   ANAGRAM_SRC=`dirname $0`; export ANAGRAM_SRC
+   ANAGRAM_HOME=`cd $ANAGRAM_SRC/..; pwd`; export ANAGRAM_HOME
+fi 
+
+ANAGRAM_LIB="$ANAGRAM_HOME/tomcat4/webapps/dods/WEB-INF/lib"
+TOMCAT_CMN="$ANAGRAM_HOME/tomcat4/common"
+TOMCAT_CP="$TOMCAT_CMN/endorsed/xercesImpl.jar:$TOMCAT_CMN/endorsed/xmlParserAPIs.jar:$TOMCAT_CMN/lib/servlet.jar"
+#CP="-classpath $ANAGRAM_SRC:$TOMCAT_CP:$ANAGRAM_LIB/dods.jar"
+CP="-classpath $ANAGRAM_SRC:$TOMCAT_CP:$ANAGRAM_LIB/dods-1.1.7.jar"
+
+mkdir -p $ANAGRAM_SRC/classes
+
+echo compiling all classes...
+
+#CMD="javac  -Xlint:depreciation -O -g -d $ANAGRAM_SRC/classes $CP \
+CMD="javac  -O -g -d $ANAGRAM_SRC/classes $CP \
+$ANAGRAM_SRC/org/iges/util/*.java \
+$ANAGRAM_SRC/org/iges/anagram/*.java \
+$ANAGRAM_SRC/org/iges/anagram/service/*.java \
+$ANAGRAM_SRC/org/iges/anagram/filter/*.java \
+$ANAGRAM_SRC/org/iges/grads/server/*.java \
+$ANAGRAM_SRC/org/iges/grads/server/dap/*.java"
+
+if $CMD ; then
+  cd $ANAGRAM_SRC/classes
+  jar cf $ANAGRAM_LIB/anagram.jar org/iges/util org/iges/anagram
+  jar cf $ANAGRAM_LIB/gds.jar org/iges/grads/server
+  echo compile successful. 
+  echo created anagram.jar and gds.jar in $ANAGRAM_LIB
+  rm -rf classes
+  echo cleaned up class files.
+else
+  echo compile failed, jars not created.
+  rm -rf classes
+  echo cleaned up class files.
+  exit 1;
+fi
+

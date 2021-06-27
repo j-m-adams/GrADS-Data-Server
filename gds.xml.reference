@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+This is a configuration file for the GrADS Data Server.
+
+See README and doc/index.html for general GDS information.
+
+See doc/tag-ref.html for help editing this file.
+
+If you want to revert your GDS to its "factory settings", overwrite
+gds.xml with the file gds.xml.reference.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<gds>
+
+  <catalog temp_size_limit="0">
+    <data>
+
+      <dataset name = "test"
+               file = "testdata/test.ctl"
+               das = "testdata/extra.das"
+	       format = "ctl">
+	       <metadata var="sst" name="extra_config_file_attribute" 
+	        value="An attribute from the GDS configuration file"/>
+      </dataset>
+
+      <!-- specify public datasets here -->
+
+      <mapdir name="private">
+ 
+        <dataset name = "test_private" file = "testdata/test.ctl"/>
+
+        <!-- specify private datasets here -->
+
+      </mapdir>
+
+    </data>
+  </catalog>
+
+  <log mode="file" file="log/gds.log" level="info" />
+
+  <grads>
+
+     <invoker grads_dir="/usr/local/grads"/> 
+     <!-- edit this tag to point to your GrADS distribution -->
+
+  </grads>
+
+
+  <servlet>
+
+    <filter-abuse enabled="false" hits="1000" timeout="24" />
+    <filter-overload enabled="false" limit="20" />
+    <!-- edit these tags to enable 'throttling' features  -->
+
+    <filter-analysis enabled="true" />
+
+  </servlet>
+
+
+  <mapper>
+
+    <service-admin enabled="false" auth="open-sesame" /> 
+    <!-- edit this tag to enable the administration service -->
+
+  </mapper>
+
+
+  <privilege_mgr default="public"> 
+
+    <ip_range mask="127.0.0.1" privilege="private" />
+
+    <privilege name="public"> 
+    <!-- edit this tag to control public access -->
+      <deny path="private" />
+    </privilege>
+
+    <privilege name="private" /> <!-- no deny tags, allows full access -->
+
+    <!-- specify more privilege sets and IP range assignments here -->
+
+  </privilege_mgr>
+
+</gds>

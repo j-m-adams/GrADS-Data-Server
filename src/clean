@@ -1,0 +1,3 @@
+rm -rf ../doc/api
+cd ../tomcat/webapps/dods/WEB-INF/lib/
+rm -f anagram.jar gds.jar

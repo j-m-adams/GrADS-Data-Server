@@ -1,0 +1,117 @@
+<?xml version="1.0"  encoding="ISO-8859-1"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure 1.2//EN" "http://jetty.mortbay.org/configure_1_2.dtd">
+
+
+
+<!-- =============================================================== -->
+<!-- Configure the Jetty Server                                      -->
+<!-- =============================================================== -->
+<!-- $Id: proxy.xml,v 1.1 2004/10/04 18:48:14 joew Exp $ -->
+<Configure class="org.mortbay.jetty.Server">
+
+  <!-- =============================================================== -->
+  <!-- Configure the Debugger                                          -->
+  <!-- =============================================================== -->
+  <!--
+    <Set name="Debug" class="org.mortbay.util.Code" type="boolean">false</Set>
+    <Set name="Verbose" class="org.mortbay.util.Code" type="int">0</Set>
+    <Set name="DebugPatterns" class="org.mortbay.util.Code" type="String"></Set>
+  -->
+
+  <!-- =============================================================== -->
+  <!-- Configure the Logger                                            -->
+  <!-- =============================================================== -->
+  <!-- UNCOMMENT TO ACTIVATE
+  <Set name="Debug" class="org.mortbay.util.Code" type="boolean">false</Set>
+  <Call name="instance" class="org.mortbay.util.Log">
+    <Call name="disableLog"/>
+    <Call name="add">
+      <Arg>
+        <New class="org.mortbay.util.OutputStreamLogSink">  
+          <Arg><SystemProperty name="jetty.home" default="."/>/logs/yyyy_mm_dd.jetty.log</Arg>
+          <Set name="retainDays">90</Set>
+          <Set name="append">true</Set>
+          <Set name="logLabels">false</Set>
+          <Set name="logStackSize">false</Set>
+          <Set name="logStackTrace">false</Set>
+          <Set name="logOneLine">true</Set>
+          <Set name="logTimeZone">GMT</Set>
+          <Call name="start"/>
+        </New>
+      </Arg>
+    </Call>
+  </Call>
+  -->
+
+
+
+  <!-- =============================================================== -->
+  <!-- Configure the Request Listeners                                 -->
+  <!-- =============================================================== -->
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- Add and configure a HTTP listener to port 8888                  -->
+  <!-- The default port can be changed using: java -Djetty.port=80     -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <Call name="addListener">
+    <Arg>
+      <New class="org.mortbay.http.SocketListener">
+        <Set name="Port"><SystemProperty name="jetty.port" default="8888"/></Set>
+        <Set name="MinThreads">5</Set>
+        <Set name="MaxThreads">100</Set>
+        <Set name="MaxIdleTimeMs">30000</Set>
+        <Set name="LowResourcePersistTimeMs">5000</Set>
+      </New>
+    </Arg>
+  </Call>
+
+
+
+
+  <!-- =============================================================== -->
+  <!-- Configure the Contexts                                          -->
+  <!-- =============================================================== -->
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- Build a proxy context.                                          -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <Call name="addContext">
+    <Arg>/</Arg>
+
+    <Call name="addHandler">
+      <Arg><New class="org.mortbay.http.handler.ProxyHandler">
+        <Set name="proxyHostsBlackList">
+          <Array type="java.lang.String">
+            <Item>www.microsoft.com</Item>
+            <Item>www.saddam.net</Item>
+          </Array>
+        </Set>
+      </New></Arg>
+    </Call>
+
+  </Call>
+
+
+  <!-- =============================================================== -->
+  <!-- Configure the Request Log                                       -->
+  <!-- =============================================================== -->
+  <Set name="RequestLog">
+    <New class="org.mortbay.http.NCSARequestLog">
+      <Arg><SystemProperty name="jetty.home" default="."/>/logs/yyyy_mm_dd.request.log</Arg>
+      <Set name="retainDays">90</Set>
+      <Set name="append">true</Set>
+      <Set name="extended">false</Set>
+      <Set name="buffered">true</Set>
+      <Set name="LogTimeZone">GMT</Set>
+    </New>
+  </Set>
+
+  <!-- =============================================================== -->
+  <!-- Configure the Other Server Options                              -->
+  <!-- =============================================================== -->
+  <Set name="requestsPerGC">2000</Set>
+  <Set name="statsOn">false</Set>
+
+</Configure>
+

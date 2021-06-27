@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
+    "http://java.sun.com/j2ee/dtds/web-app_2.2.dtd">
+
+<web-app> <!-- do not modify this file -->
+
+    <servlet> 
+
+        <servlet-name> anagram </servlet-name>
+
+        <servlet-class> org.iges.anagram.AnagramServlet </servlet-class>
+
+        <init-param>
+            <param-name>anagram.impl</param-name>
+            <param-value>gds</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>anagram.impl_long</param-name>
+            <param-value>GrADS Data Server</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>anagram.impl_version</param-name>
+            <param-value>2.1</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>anagram.impl_class</param-name>
+            <param-value>org.iges.grads.server.GradsTool</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>anagram.impl_home</param-name>
+            <param-value>http://cola.gmu.edu/grads/gds</param-value>
+        </init-param>
+
+        <init-param> 
+            <param-name>anagram.output</param-name>
+            <param-value>info</param-value>
+        </init-param>
+
+	<load-on-startup> 1 </load-on-startup>
+
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name> anagram </servlet-name>
+        <url-pattern> / </url-pattern>
+    </servlet-mapping>
+
+</web-app>

@@ -1,0 +1,199 @@
+Release history
+==============
+
+2.1   - Copyright updated, code moved to GitHub.
+	GrADS version 2.0.a6 or later is required for proper undef handling.
+
+2.0   - GDS upgraded for compatibiity with GrADS version 2.0
+	Requires GrADS 2.0.a2+ (executable names are different: grads and gradsdap)
+        Handles data in grib2 format.
+        Supports 5-Dimensional Ensemble data sets. Ensemble metadata is tailored
+        for GrADS client, but should not interfere with access by other clients
+	Server-side analysis is more flexible, result can vary in all 5 dimensions.
+	Bug fix: native attributes not passed through for hdf/netcdf descriptor files
+
+1.3   - ** GDS and Anagram are now under the GNU General Public License **
+        The GrADS-DODS Server was renamed to GrADS Data Server and all
+	visible mentions of DODS replaced with OPeNDAP.
+
+        Updated Java DAP to version 1.1.7 which implements DAP 2.0.
+	Updated THREDDS XML to version 1.0.
+
+        Overhaul of attribute parsing code:
+	* descriptor attributes are distinguished from native file attributes
+        * time metadata added for station datasets
+	* additional metadata for gridded datasets: dataType "Grid"
+          plus "resolution" and "resolution_units" for all grid coordinates
+        * handles any special characters appearing in attribute values
+	* allows overriding of data set attributes at configuration level
+	* provides grads_* attributes sufficient for GrADS open command
+
+        Improved organization of environment variables and code relating to
+	disk paths for various server resources. The GDS shell environment is
+        set up with bin/gds-env.sh. Multiple servers may be run from a single
+	souce code installation by using the ANAGRAM_BASE and CATALINA_BASE
+        environment variables to isolate the modifiable data (the config, log,
+        and temp files) for each server instance.
+
+	Added JETTY, an experimental optional servlet container. JETTY is
+	invoked with bin/jetty-wrapper.sh and controlled by environmental
+	variables JETTY_PORT, JETTY_STOP_PORT, and JETTY_CONFIG.
+
+
+1.2.9 - Prototype support for THREDDS XML catalogs (accessed by the
+        URL "http://servername/dods/thredds").
+
+        Contains a bug fix in subset.gs for high-res 1D subsets.
+
+        This release contains an important bug fix for returning the results
+        of analysis expressions. Results are read from the cache using the
+	direct subsetting option, and now the data file is opened instead
+	of the descriptor file.
+
+1.2.8 - This release contains some minor modifications that support serving
+        large binary files (>2 gigabytes), and high-resolution gridded data
+	sets (>0.05 degrees lat/lon or smaller). Subsets of high-res grids
+	will be the correct size, but server-side analysis results may not.
+	(This is because subsets are done in grid coordinates and analysis
+	tasks are done in world coordinates.) Further improvements to the
+	handling of high-res grids will be a part of later GrADS releases.
+	These GDS modifications are complemented by GrADS version 1.9b2
+	(and higher). This version of GrADS must be used behind the server
+	in order for the modifications to take effect.
+
+1.2.7 - New direct_subset attribute for dataset tag, provides an
+        optimization for use in data-intensive applications such as
+        distributed modeling. GDS can do in-process I/O (no separate
+        GrADS process is invoked) for correctly-formatted IEEE binary
+        datasets. This appears to provide close to a full
+        order-of-magnitude improvement in throughput.
+
+	Metadata attributes can be added to datasets in the configuration
+	file using the metadata tag.
+
+	Metadata attributes can be extracted from self-describing datasets
+	using the metadata-filter tag. (Requires GrADS 1.9)
+
+	A workaround for an I/O problem related to high-resolution
+	grids has been applied. GDS can now serve datasets down to
+	5km resolution without distortion.
+
+	Startup scripts now check the value of the GADDIR environment
+	variable, to ensure that the sdfopen netCDF/HDF interface will
+	function properly.
+
+	Admin service can be enabled for specific privilege levels only, 
+	using the admin_allowed attribute.
+
+	Import module will handle GDS 1.9 BUFR descriptors correctly.
+
+1.2.6 - GDS now comes with Tomcat 4.1 instead of Tomcat 3.2.
+        New start/stop/cleanup scripts in bin/:
+	    Automatically respawn Tomcat if it goes down;
+	    Can be run from any directory;
+	    Provide more informative output.
+	New utility, utils/gds-reload.sh, provides a simple way to send
+	    admin commands to server
+	Server-side analysis requests can now vary in three dimensions.
+      	Improved admin service design can no longer block other requests
+	    or hang server, and supports POST method for requests.
+	Fixed bugs relating to:
+	    enabling/disabling filters
+	    abuse blocking filter not reconfiguring properly
+	    spuriously high hit counts in abuse blocking filter
+	    use of cached analysis results in follow-on analysis
+	    HTTP caching headers
+	    potential name collisions in temporary cache
+	    strided (subsampled) data requests coming up short
+
+
+1.2.5 - Changed numbering scheme to remove "b".
+        Documentation attribute seemed to confuse client parsers;
+         changed type from URL to String.
+        Fixed analysis bug where valid GrADS dates were being rejected
+        Fixed data import to remove prefix and suffix strings from
+         dataset names
+
+1.2b4 - Added time metadata for station datasets
+        Fixed more station data bugs
+
+1.2b3 - Removed config file timestamp check on reconfigure
+        Fixed directory name parsing bugs
+
+1.2b2 - Fixed station data support
+
+1.2b1 - Major update to GDS, with a new modular architecture,
+	XML-based configuration mechanism, expanded documentation,
+	major internal code improvements, and new features in
+	the following areas:
+
+	Dataset loading:
+	- online catalog organizes datasets into subdirectories
+	- entire directory trees and text lists of datasets can be loaded
+	  via a single entry in the config file
+	- additional metadata attributes,
+	  and a URL pointing to online documentation, can
+	  be specified for each dataset
+	- capable of serving remote DODS datasets, as well
+	  as datasets local to the server
+	- if given a complete GrADS distribution,
+	  automatically invokes the correct GrADS binary (gradsc, gradsnc,
+	  gradshdf, gradsdods) for each dataset
+
+	User/client interface:
+	- more usable and consistent web page format, with some
+	  customizable hyper-links
+	- full support for the "stride" parameter in constraint expressions
+	- dependency checking forces recalculation of analysis results
+	  when source datasets change
+
+	Basic operation:
+	- new "admin" service can be used to control dynamic
+	  reconfiguration, and flush temporary datasets
+	- all GDS settings are now updated during reconfiguration
+	- multiple GDS instances can run in the same servlet container
+
+	Security:
+	- multiple IP ranges can be mapped to a single privilege set
+	  (previously known as an access level)
+	- privilege sets can inherit settings from each other
+
+	Logging:
+	- options to send log output to a rotating set of files,
+          or to the console
+	- customizable logging levels and message format
+
+
+1.1b9: Changed units of generate_limit setting from MB to KB for finer control.
+       Fixed bug that caused time value at boundary of daylight savings to be
+       off by one hour.
+
+1.1b8: Fixed deadlock problem in dataset lock mechanism
+
+1.1b7: Added temp_dataset_limit and temp_expire_time settings to improve
+       control over resource usage
+
+1.1b6: Added hit_limit and abuse_timeout settings to mitigate the effects
+       of misbehaving clients
+
+1.1b5: Fixed problems with using "+" in expressions, and unpredictable
+       hangs during startup on some platforms
+
+1.1b4: Added support for the .info and .ascii services. Made the error pages
+more user-friendly. Additional performance improvements. Changed missing_value
+to _FillValue to comply with new CF metadata convention. Log now includes
+user domain names when possible.
+
+1.1b3: Added dynamic reloading of datasets, made major performance
+improvements.
+
+1.1b2: Added multi-stage analysis capability, made cache persistent between
+restarts, and added IP security features. Fixed some minor bugs.
+
+1.1b1: Added analysis capability, cache management, XML output, improved
+configuration, switched from JSDK2.1 to Tomcat 3.1, and innumerable other
+improvements.
+
+1.0: First release of the GrADS Data server, with subsetting capability
+only.
+

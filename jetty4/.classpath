@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test/src"/>
+	<classpathentry kind="lib" path="ext/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="ext/jnet.jar"/>
+	<classpathentry kind="lib" path="extra/ext/jts1_0.jar"/>
+	<classpathentry kind="lib" path="ext/jsse.jar"/>
+	<classpathentry kind="lib" path="ext/xml-apis.jar"/>
+	<classpathentry kind="lib" path="ext/jasper-runtime.jar"/>
+	<classpathentry kind="lib" path="ext/jmxri.jar"/>
+	<classpathentry kind="lib" path="ext/jcert.jar"/>
+	<classpathentry kind="lib" path="ext/ant.jar"/>
+	<classpathentry kind="lib" path="ext/jasper-compiler.jar"/>
+	<classpathentry kind="lib" path="ext/jmxtools.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/usr/share/java/junit.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

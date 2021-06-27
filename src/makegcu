@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Script to build upload client
+#
+# Copyright (C) 2000-2021 by George Mason University.
+# Authored by Joe Wielgosz and maintained by Jennifer Adams.
+# See file COPYRIGHT for more information.
+
+javac grads/client/*.java

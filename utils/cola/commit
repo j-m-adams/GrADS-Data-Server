@@ -1,0 +1,19 @@
+#!/bin/sh
+if [ ! "$@" ] ; then
+dirs=.
+else
+  dirs="$@"
+fi
+gdshome=`dirname $0`/../..
+cd $gdshome
+echo "*** modified files for check in: $dirs ***"
+cvs -q update $dirs | grep -v '\?'
+oldversion=`cat VERSION`
+echo -n "new version (current is $oldversion) (is README up to date?): "
+read newversion
+if [ "$newversion" == "" ] ; then newversion=$oldversion ; fi
+echo "new version is $newversion"
+sed -e "s/$oldversion/$newversion/g" < VERSION > VERSION.new; mv -f VERSION.new VERSION
+sed -e "s/$oldversion/$newversion/g" < tomcat4/webapps/dods/WEB-INF/web.xml > tomcat4/webapps/dods/WEB-INF/web.xml.new; mv -f tomcat4/webapps/dods/WEB-INF/web.xml.new tomcat4/webapps/dods/WEB-INF/web.xml
+src/makejar
+cvs -q commit $dirs VERSION tomcat4/webapps/dods/WEB-INF

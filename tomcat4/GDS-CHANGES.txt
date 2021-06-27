@@ -1,0 +1,42 @@
+About the bundled Tomcat installation in GDS
+============================================
+
+This directory contains a modified version of the default Apache
+Jakarta-Tomcat servlet container, version 4.1.
+
+Tomcat is included with the GDS in order to make the installation
+process simpler. The GDS does *not* require Tomcat specifically. The
+GDS can run in any JSDK 2.3-compliant servlet container. See the GDS
+administrator's guide (../doc/admin.html) for more details.
+
+Changes made from the standard Tomcat installation:
+
+conf/server.xml: 
+
+	The HTTP 1.1 connector is on port 9090 instead of 8080.
+
+	The shutdown port is 9005, and the shutdown string is
+	"GDS-SHUTDOWN".
+
+	All log messages go to ../log/tomcat.yyyymmdd.log
+
+	A context named "doc" has been added, which points to the
+	static GDS documentation pages in ../doc.
+
+	The file server-gds.xml can be used to revert to the "factory"
+	settings for use with GDS. The files server-noexamples.xml and
+	server-examples.xml contain the "factory" settings from the
+	Apache distribution.
+
+
+webapps:
+	
+	All the default webapps, as well as the contents of
+	server/webapps, have been removed from this distribution, to
+	reduce the size of the package and avoid long filenames in the
+	tarfile. The webapps directory contains only GDS-specific
+	content.
+
+	The default webapps can be obtained by downloading Tomcat 4.1 from
+	http://jakarta.apache.org/tomcat and copying the webapps and 
+	server/webapps directories over.
