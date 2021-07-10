@@ -21,8 +21,7 @@ mkdir -p $ANAGRAM_SRC/classes
 
 echo compiling all classes...
 
-#CMD="javac  -Xlint:depreciation -O -g -d $ANAGRAM_SRC/classes $CP \
-CMD="javac  -O -g -d $ANAGRAM_SRC/classes $CP \
+CMD="javac  -Xlint:deprecation -O -g -d $ANAGRAM_SRC/classes $CP \
 $ANAGRAM_SRC/org/iges/util/*.java \
 $ANAGRAM_SRC/org/iges/anagram/*.java \
 $ANAGRAM_SRC/org/iges/anagram/service/*.java \
