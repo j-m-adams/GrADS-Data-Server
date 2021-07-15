@@ -1,6 +1,11 @@
 Release history
 ==============
 
+2.2   - Changed all instances of http:// to https://
+	Removed echo of request syntax in all error messages
+	Changed time axis unit to 'days since 1970-01-01T00:00:00Z'
+        Removed support for quirky unmappable character strings
+
 2.1   - Copyright updated, code moved to GitHub.
 	GrADS version 2.0.a6 or later is required for proper undef handling.
 
@@ -28,7 +33,7 @@ Release history
 	* allows overriding of data set attributes at configuration level
 	* provides grads_* attributes sufficient for GrADS open command
 
-        Improved organization of environment variables and code relating to
+         Improved organization of environment variables and code relating to
 	disk paths for various server resources. The GDS shell environment is
         set up with bin/gds-env.sh. Multiple servers may be run from a single
 	souce code installation by using the ANAGRAM_BASE and CATALINA_BASE

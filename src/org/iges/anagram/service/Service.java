@@ -52,7 +52,7 @@ public abstract class Service
      *  using the current request.
      */
     protected String getBaseURL(ClientRequest clientRequest) {
-	return "http://" + 
+	return "https://" + 
 	    clientRequest.getHttpRequest().getServerName() + ":" +
 	    clientRequest.getHttpRequest().getServerPort() + 
 	    clientRequest.getHttpRequest().getContextPath();

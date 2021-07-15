@@ -6,8 +6,8 @@ package org.iges.util;
 
 /** An exception class supporting chaining. 
  *  
- *  Taken from the article <a href=
- *  "http://developer.java.sun.com/developer/technicalArticles/Programming/exceptions2/"> Exceptional practices, Part 2</a> by Brian Goetz, JavaWorld Oct 2001
+ *  Taken from the article "Exceptional practices, Part 2"
+ *  by Brian Goetz, JavaWorld Oct 2001
  */
 public class ChainedException extends Exception {
     private Throwable cause = null;

@@ -200,11 +200,11 @@ public class THREDDSCatalogService
 	    page.print
 		("<?xml version=\"1.0\"?>\n");
 	    page.print
-		("<!DOCTYPE catalog SYSTEM \"http://www.unidata.ucar.edu/projects/THREDDS/xml/InvCatalog.0.6.dtd\">\n");
+		("<!DOCTYPE catalog SYSTEM \"https://www.unidata.ucar.edu/projects/THREDDS/xml/InvCatalog.0.6.dtd\">\n");
 	    page.print
 		 ("<catalog" +
-		  " xmlns=\"http://www.unidata.ucar.edu/thredds\"" +
-		  " xmlns:xlink=\"http://www.w3.org/1999/xlink\"" +
+		  " xmlns=\"https://www.unidata.ucar.edu/thredds\"" +
+		  " xmlns:xlink=\"https://www.w3.org/1999/xlink\"" +
 		  " version=\"0.6\" name=\"" + server.getServerName() + 
 		  "\" >\n");
 	    page.print
@@ -251,8 +251,8 @@ public class THREDDSCatalogService
 		("<?xml version=\"1.0\"?>\n");
 	    page.print
 		 ("<catalog" + 
-		  " xmlns=\"http://www.unidata.ucar.edu/namespaces/thredds/InvCatalog/v1.0\"" +
-		 " xmlns:xlink=\"http://www.w3.org/1999/xlink\"" +
+		  " xmlns=\"https://www.unidata.ucar.edu/namespaces/thredds/InvCatalog/v1.0\"" +
+		 " xmlns:xlink=\"https://www.w3.org/1999/xlink\"" +
 		 " version=\"1.0\" name=\"" + server.getServerName() + 
 		  "\" >\n");
 	    page.print

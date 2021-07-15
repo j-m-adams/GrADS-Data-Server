@@ -37,11 +37,6 @@ public class Strings {
 	source = replace(source, ">", "&gt;");
 	source = replace(source, "\'", "&apos;");
 	source = replace(source, "\"", "&quot;");
-	source = replace(source, "·", "");
-	source = replace(source, "¼", "0.25 ");
-	source = replace(source, "½", "0.5 ");
-	source = replace(source, "°", "degree ");
-	source = replace(source, "×", "by ");
 	return source;
     }
 }

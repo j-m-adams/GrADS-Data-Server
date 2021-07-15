@@ -37,7 +37,7 @@ public class XMLCatalogService
 			(response.getOutputStream()));
 	} catch (IOException ioe) { return;}
 	    
-	String baseURL = "http://" + 
+	String baseURL = "https://" + 
 	    request.getServerName() + ":" +
 	    request.getServerPort() + 
 		request.getContextPath();
