@@ -511,8 +511,8 @@ public abstract class GradsExtracter
 	    double max = values[values.length - 1];
 	    double res = Math.abs((max - min) / (values.length - 1));
 
-	    // Used by printDim(). This is a big mess but I don't
-	    // have the time to clean it up.
+	    // Used by printDim().
+	    // The normalized value tNormRes and tNormResUnits never get used
 	    this.tNormRes = String.valueOf(normalTime(res));
 	    this.tNormResUnits = normalTimeUnit(res);
 	    this.resValues.put(dim, new Float(res));
@@ -588,7 +588,6 @@ public abstract class GradsExtracter
 	return index;
     }
 
-
     protected final static String[] tUnits = {
 	"days", "hours", "minutes"
     };
@@ -598,8 +597,8 @@ public abstract class GradsExtracter
 	1.0, 
 	24.0,
 	24.0 * 60.0
-    };
-
+    };    
+    
     protected final static NumberFormat doubleFormat =
 	NumberFormat.getInstance(); 
     { 
@@ -612,14 +611,14 @@ public abstract class GradsExtracter
     /** Converts a GrADS date, a string with format yyyy:M:d:H or 
      * yyyy:M:d:H:m, to a udunits-compatible COARDS date, which is a 
      * floating point number 
-     * in units of days since Jan 01, 0001. 
+     * in units of days since 1970-01-01T00:00:00.000Z
      */
     protected double convertGradsDateToCOARDS(String dateString) {
     
 	Date parsedDate = Range.parseGradsFormat(dateString);
 
-	// Set origin date to 01/01/0001, 12am GMT
-	Calendar origin = new GregorianCalendar(1, // year
+	// Set origin date to 01/01/1970, 12am GMT
+	Calendar origin = new GregorianCalendar(1970, // year
 						0, // month, 0-based
 						1  // day
 						);

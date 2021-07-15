@@ -10,6 +10,7 @@ import dods.dap.*;
 import dods.dap.Server.*;
 
 import org.iges.anagram.*;
+import org.iges.anagram.Module;
 
 /** GrADS-based implementation of the Anagram framework. This just
  *  ties together the various specialized modules in to a single

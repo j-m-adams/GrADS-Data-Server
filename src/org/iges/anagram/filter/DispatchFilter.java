@@ -26,9 +26,7 @@ public class DispatchFilter
 	if (clientRequest.getService() == null || 
 	    !clientRequest.getService().isEnabled()) {
 
-	    throw new ModuleException(this, 
-				      clientRequest.getServiceName() +
-				      " is not an available service");
+	    throw new ModuleException(this, "not an available service");
 	}
 	if (debug()) debug(clientRequest + "dispatching request");
 

@@ -76,12 +76,11 @@ public class WebErrorService
 	}	    
     }
 
-    protected void sendErrorHTML(PrintStream out, String url, String msg) {
-	    out.print("The server could not fulfill this request:<p>");
-	    out.print("<b>");
-	    out.print(url);
-	    out.print("</b><p>");
-	    out.print(" because of the following error:<p>\n");
+    protected void sendErrorHTML(PrintStream out,
+				 String url,
+				 String msg) {
+	    out.print("The server could not fulfill this request ");
+	    out.print("because of the following error:<p>\n");
 	    out.print("<b>");
 	    out.print(msg);
 	    out.print("</b><p>\n");
@@ -93,10 +92,7 @@ public class WebErrorService
     protected void sendUnexpectedHTML(PrintStream out, 
 				      ClientRequest request,
 				      String debugInfo) {
-	out.print("Oops! The server encountered an unexpected error while serving the this request:<p>");
-	out.print("<b>");
-	out.print(request.getFullURL());
-	out.print("</b><p>");
+	out.print("Oops! The server encountered an unexpected error.<p>");
 	out.print("Please report this error to <a href=\"");
 	out.print(server.getImplHomePage());
 	out.print("\">");
