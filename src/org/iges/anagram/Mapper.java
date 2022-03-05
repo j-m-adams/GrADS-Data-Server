@@ -57,9 +57,6 @@ public class Mapper
 	services.put("help", new HelpService());
 	services.put("info", new InfoService());
 	services.put("thredds", new THREDDSCatalogService());
-	services.put("upload", new UploadService());
-	//	services.put("ver", new VersionService());
-	//	services.put("version", services.get("ver"));
 	services.put("xml", new XMLCatalogService());
 	Iterator it = services.values().iterator();
 	while (it.hasNext()) {

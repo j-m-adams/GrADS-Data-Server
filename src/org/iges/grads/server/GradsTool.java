@@ -16,7 +16,6 @@ import org.iges.anagram.Module;
  *  ties together the various specialized modules in to a single
  *  interface.  For example, the actual work for routine data and
  *  metadata requests is done by the GradsDODSModule.
- * @see GradsUploadModule
  * @see GradsUpdateModule
  * @see GradsAnalysisModule
  * @see GradsImportModule
@@ -49,10 +48,6 @@ public class GradsTool
 	analyzer = new GradsAnalysisModule(this);
 	analyzer.init(server, this);
 
-	if (verbose()) log.verbose(this, "creating uploader module");
-	uploader = new GradsUploadModule(this);
-	uploader.init(server, this);
-
 	if (verbose()) log.verbose(this, "creating updater module");
 	updater = new GradsUpdateModule(this);
 	updater.init(server, this);
@@ -67,7 +62,6 @@ public class GradsTool
 	configModule(task, setting);
 	configModule(dods, setting);
 	configModule(analyzer, setting);
-	configModule(uploader, setting);
 	configModule(updater, setting);
     }	
 
@@ -85,18 +79,6 @@ public class GradsTool
 					      Privilege privilege) 
 	throws ModuleException {
 	return analyzer.doAnalysis(name, ae, privilege);
-    }
-
-    /** @param input The stream of data to be stored
-     * @return Handle(s) to the stored data
-     * @throws ModuleException if the operation fails for any reason
-     */
-    public TempDataHandle doUpload(String name,
-					    InputStream input,
-					    long size,
-					    Privilege privilege)
-	throws ModuleException {
-	return uploader.doUpload(name, input, size, privilege);
     }
 
 
@@ -200,7 +182,6 @@ public class GradsTool
     }
 
 
-    protected GradsUploadModule uploader;
     protected GradsUpdateModule updater;
     protected GradsAnalysisModule analyzer;
     protected GradsImportModule importer;

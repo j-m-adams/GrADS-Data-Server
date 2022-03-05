@@ -17,7 +17,7 @@ import dods.dap.Server.*;
  *  
  *  Thus, implementing the Anagram framework simply means
  *  implementing this class, plus possibly TempDataHandle 
- *  (see doAnalysis() and doUpload()).
+ *  (see doAnalysis()).
  *  
  */
 public abstract class Tool 
@@ -58,26 +58,6 @@ public abstract class Tool
     public abstract TempDataHandle doAnalysis(String name,
 					      String ae, 
 					      Privilege privilege) 
-	throws ModuleException;
-
-    /** Accepts an uploaded data object.<p>
-     *  If uploads are not supported, this method
-     *  should throw an exception. <p>
-     *
-     * This method must be threadsafe.<p>
-     *
-     * @param input The stream of data to be stored
-
-     * @return A handle to the uploaded data object. TempDataHandle
-     *  is an abstract interface. Thus, this method is responsible for
-     *  supplying an object which implements TempDataHandle properly.
-     *
-     * @throws ModuleException if the upload fails for any reason
-     */
-    public abstract TempDataHandle doUpload(String name,
-					    InputStream input,
-					    long size,
-					    Privilege privilege)
 	throws ModuleException;
 
     /** Brings the data handle provided up to date with respect to the 

@@ -512,7 +512,7 @@ public abstract class GradsExtracter
 	    double res = Math.abs((max - min) / (values.length - 1));
 
 	    // Used by printDim().
-	    // The normalized value tNormRes and tNormResUnits never get used
+ 	    // The normalized value tNormRes and tNormResUnits never get used
 	    this.tNormRes = String.valueOf(normalTime(res));
 	    this.tNormResUnits = normalTimeUnit(res);
 	    this.resValues.put(dim, new Float(res));
