@@ -35,7 +35,7 @@ public class AnagramServlet
 	this.log = server.getLog();
 	moduleName = parent.getModuleName() + "/" + getModuleID();
 	dodsErrorServices = new HashSet(Arrays.asList(new String[]{
-	    "dds", "das", "dods", "upload"
+	    "dds", "das", "dods"
 	}));
 	dodsErrorHandler = new DODSErrorService();
 	dodsErrorHandler.init(server, this);

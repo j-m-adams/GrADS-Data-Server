@@ -479,13 +479,21 @@ public class Catalog
 	long now = System.currentTimeMillis();
 	long limit = tempAgeLimit * 60 * 60 * 1000;
 	while (tempAgeLimit != 0) {
-	    TempDataHandle current = 
-		(TempDataHandle)tempDeleteQueue.getFirst();
-	    long age = now - current.getCreateTime();
-	    if (age < limit) {
+	    try {
+		TempDataHandle current = 
+		    (TempDataHandle)tempDeleteQueue.getFirst();
+		long age = now - current.getCreateTime();
+		if (age < limit) {
+		    break;
+		} 
+		removeTemp("age limit exceeded", null);
+	    }
+	    catch (NoSuchElementException nsee) {
+		if (debug()) log.debug(this,
+				       "Nothing left in the tempDeleteQueue");
 		break;
-	    } 
-	    removeTemp("age limit exceeded", null);
+  
+	    }		
 	}
     }
 

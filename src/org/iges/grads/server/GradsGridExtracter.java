@@ -333,7 +333,7 @@ public class GradsGridExtracter
 	      minValues.get("time").toString());
 	smAtt("time", "String", "grads_step", 
 	      String.valueOf(this.tStep));
-	smAtt("time", "String", "units", "days since 1-1-1 00:00:0.0");
+	smAtt("time", "String", "units", "days since 1970-1-1 00:00:0.0");
 	smAtt("time", "String", "long_name", "time");
 	smAtt("time", "String", "minimum", minValues.get("time").toString());
 	smAtt("time", "String", "maximum", maxValues.get("time").toString());

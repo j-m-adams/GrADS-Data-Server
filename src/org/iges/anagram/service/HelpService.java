@@ -81,7 +81,7 @@ public class HelpService
 	buffer.append("    <br>\n");
 	buffer.append("  </li>\n");
 	buffer.append("  <li>the OPeNDAP protocol, how to access data on OPeNDAP servers, and how to obtain\n");
-	buffer.append("OPeNDAP-enabled client software - see the&nbsp; <a href=\"http://www.opendap.org\">\n");
+	buffer.append("OPeNDAP-enabled client software - see the&nbsp; <a href=\"https://www.opendap.org\">\n");
 	buffer.append("OPeNDAP home page</a>\n");
 	buffer.append(".\n");
 	buffer.append("  </li>\n");

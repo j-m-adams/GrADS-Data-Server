@@ -39,7 +39,7 @@ public class GradsAnalysisModule
 	String allowed = privilege.getAttribute("analyze_allowed", "true");
 	if (!allowed.equals("true")) {
 	    throw new ModuleException(this, 
-				      "upload service not available");
+				      "analysis service not available");
 	}
 
 	ParsedExpression parsed = new ParsedExpression(ae, privilege);

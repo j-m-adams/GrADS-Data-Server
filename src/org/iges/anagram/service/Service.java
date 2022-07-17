@@ -52,7 +52,7 @@ public abstract class Service
      *  using the current request.
      */
     protected String getBaseURL(ClientRequest clientRequest) {
-	return "http://" + 
+	return "https://" + 
 	    clientRequest.getHttpRequest().getServerName() + ":" +
 	    clientRequest.getHttpRequest().getServerPort() + 
 	    clientRequest.getHttpRequest().getContextPath();
@@ -193,19 +193,16 @@ public abstract class Service
 	Handle handle = clientRequest.getHandle();
 	if (handle == null || 
 	    !clientRequest.getPrivilege().allows(handle.getCompleteName())) {
-	    throw new ModuleException(this, clientRequest.getDataPath() +
-				      " is not an available dataset");
+	    throw new ModuleException(this, "not an available dataset");
 	}
 	if (handle instanceof DirHandle) {
-	    throw new ModuleException(this, clientRequest.getDataPath() +
-				      " is a directory");
+	    throw new ModuleException(this, "dataset is a directory");
 	} else {
 	    DataHandle data = (DataHandle)handle;
 	    if (data.isAvailable()) {
 		return data;
 	    } else {
-		throw new ModuleException(this, handle.getCompleteName() + 
-					  " is temporarily unavailable");
+		throw new ModuleException(this, "unavailable");
 	    }
 	}
     }
